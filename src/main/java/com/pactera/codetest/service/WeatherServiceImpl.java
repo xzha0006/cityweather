@@ -32,7 +32,7 @@ public class WeatherServiceImpl implements WeatherService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    private final Long TIME_OUT = 10L;
+    private final Long TIME_OUT = 2400L; //set timeout to 40 minutes
 
     @Value("${OpenWeatherApiKey}")  // call api key from application.properties
     private String ApiKey;
