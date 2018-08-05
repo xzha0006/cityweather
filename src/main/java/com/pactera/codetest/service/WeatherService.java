@@ -3,8 +3,10 @@ package com.pactera.codetest.service;
 import com.pactera.codetest.vo.WeatherInfo;
 
 /**
- * Weather
+ * Weather Service
+ * Created by xuanzhang on 4/8/18.
  */
+
 public interface WeatherService {
 
     /**

@@ -1,10 +1,12 @@
 package com.pactera.codetest.vo;
 
 import com.google.gson.JsonObject;
+import com.pactera.codetest.exception.JsonParseException;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * WeatherInfo is used for the displayed weather information
@@ -19,6 +21,7 @@ public class WeatherInfo implements Serializable {
     private String weather;
     private Float temperature;
     private Float wind;
+    private String status;  //success or failure
 
     /**
      * This method is used to parse json from OpenWeatherAPI to WeatherInfo object
@@ -28,26 +31,31 @@ public class WeatherInfo implements Serializable {
      * @return
      */
 
-    public static WeatherInfo parseOpenWeatherData(JsonObject weatherData) {
+    public static WeatherInfo parseOpenWeatherData(JsonObject weatherData) throws JsonParseException {
         WeatherInfo weatherInfo = new WeatherInfo();
+        try {
+            String cityName = weatherData.get("name").getAsString();
+            String weather = weatherData.getAsJsonArray("weather")
+                    .get(0).getAsJsonObject().get("main").getAsString();
+            Float temp = weatherData.getAsJsonObject("main").get("temp").getAsFloat();
+            Long updateTimeStamp = weatherData.get("dt").getAsLong();
+            Date updateTime = new Date(updateTimeStamp * 1000); // convert time stamp to milliseconds
+            String pattern = "EEEEE hh:mm aa";
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+10"));
+            String updateTimeFormatted = sdf.format(updateTime);
 
-        String cityName = weatherData.get("name").getAsString();
-        String weather = weatherData.getAsJsonArray("weather")
-                .get(0).getAsJsonObject().get("main").getAsString();
-        Float temp = weatherData.getAsJsonObject("main").get("temp").getAsFloat();
-        Long updateTimeStamp = weatherData.get("dt").getAsLong();
-        Date updateTime = new Date(updateTimeStamp * 1000); // convert time stamp to milliseconds
-        String pattern = "EEEEE hh:mm aa";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String updateTimeFormatted = simpleDateFormat.format(updateTime);
+            Float wind = weatherData.getAsJsonObject("wind").get("speed").getAsFloat() * 3.6f; // convert m/s to km/h
 
-        Float wind = weatherData.getAsJsonObject("wind").get("speed").getAsFloat() * 3.6f; // convert m/s to km/h
-
-        weatherInfo.setCityName(cityName);
-        weatherInfo.setUpdateTime(updateTimeFormatted);
-        weatherInfo.setTemperature(temp);
-        weatherInfo.setWind(wind);
-        weatherInfo.setWeather(weather);
+            weatherInfo.setCityName(cityName);
+            weatherInfo.setUpdateTime(updateTimeFormatted);
+            weatherInfo.setTemperature(temp);
+            weatherInfo.setWind(wind);
+            weatherInfo.setWeather(weather);
+            weatherInfo.setStatus("success");
+        } catch (Exception e) {
+            throw new JsonParseException("Error occurs while parsing json data into WeatherInfo");
+        }
 
         return weatherInfo;
     }
@@ -90,5 +98,13 @@ public class WeatherInfo implements Serializable {
 
     public void setWind(Float wind) {
         this.wind = wind;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

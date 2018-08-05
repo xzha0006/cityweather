@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * RestTemplate Configuration
- *
+ * RestTemplate class is used to send http request.
  * Created by xuanzhang on 4/8/18.
  */
 
