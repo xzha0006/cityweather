@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * implement of WeatherService
  * use Redis to cache the weather record
  * Created by xuanzhang on 4/8/18.
+ *
  */
 
 @Service
