@@ -46,7 +46,8 @@ public class WeatherServiceImpl implements WeatherService {
         String url = this.OPEN_WEATHER_API + "&q=" + cityName + "&appid=" + this.ApiKey;
 
         //check the connection of Redis. if Redis was done, use the method of no-Redis
-        if(this.stringRedisTemplate.isExposeConnection()) {
+
+        if(!stringRedisTemplate.getConnectionFactory().getConnection().isClosed()) {
             weatherInfo = this.getWeatherInfoWithRedis(url);
         } else {
             weatherInfo = this.getWeatherInfoWithoutRedis(url);
