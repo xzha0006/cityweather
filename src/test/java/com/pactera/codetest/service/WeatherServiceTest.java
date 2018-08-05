@@ -11,8 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by xuanzhang on 5/8/18.
@@ -20,16 +19,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class WeatherServiceTest {
     @Autowired
     private WeatherService weatherService;
 
     @Test
     public void testWeatherService() throws Exception {
-//        WeatherInfo weatherInfo0 = weatherService.getCurrentWeatherByCityName("Melbourne");
-//        WeatherInfo weatherInfo1 = weatherService.getCurrentWeatherByCityName("Centaurus");
-//        WeatherInfo weatherInfo2 = weatherService.getCurrentWeatherByCityName("");
+        //valid city name
+        WeatherInfo weatherInfo0 = weatherService.getCurrentWeatherByCityName("Melbourne");
+        //invalid city name
+        WeatherInfo weatherInfo1 = weatherService.getCurrentWeatherByCityName("Centaurus");
+        //empty city name
+        WeatherInfo weatherInfo2 = weatherService.getCurrentWeatherByCityName("");
+
+        assertThat(weatherInfo0.getCityName()).isEqualTo("Melbourne");
+        assertThat(weatherInfo1.getStatus()).isEqualTo("failure");
+        assertThat(weatherInfo2.getStatus()).isEqualTo("failure");
 
     }
 }
