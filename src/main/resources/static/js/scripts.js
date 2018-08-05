@@ -5,7 +5,7 @@
  */
 function getWeather(city) {
     // var url = "http://35.165.93.211:8080/currentWeather/cityName/" + city
-    var url = "http://localhost:8080/currentWeather/cityName/" + city
+    var url = "http://localhost:9000/currentWeather/cityName/" + city
     $.get(url, function(weather, status){
         if (status === "success") {
             if (weather.status === "success") {
