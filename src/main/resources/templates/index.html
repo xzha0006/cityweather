@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Xuan Zhang">
+    <title>City Weather</title>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Weather icons -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weather-icons.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weather-icons-wind.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weather-icons.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weather-icons-wind.min.css}">
+    <!-- Page stylesheet -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <!-- CDN jQuery and Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity=
+            "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity=
+            "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Page scripts -->
+    <script th:src="@{/js/scripts.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="block">
+                <h3>City Weather</h3>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select a city
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a th:each="city : ${cityList}" th:text="${city}" class="dropdown-item" href="#"
+                           th:onclick="'getWeather(\''+${city}+'\')'">Melbourne</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+            <div class="block">
+                <h3 id="city-name">Welcome!</h3>
+                <div id="weather-block">
+                    <div>
+                        <span id="weather-icon"><i class="wi wi-night-sleet"></i></span>
+                        <span id="temperature">17</span> <span class="degree-sign">&#176;C</span>
+                    </div>
+                    <div>Weather: <span id="weather">Cloud</span></div>
+                    <div>Wind: <span id="wind-speed">39</span> km/h</div>
+                    <div>Updated: <span id="updated-time">17:00pm</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="raindrop"></div>
+</body>
+</html>

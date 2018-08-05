@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.pactera.codetest.exception.JsonParseException;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -38,6 +39,8 @@ public class WeatherInfo implements Serializable {
             String weather = weatherData.getAsJsonArray("weather")
                     .get(0).getAsJsonObject().get("main").getAsString();
             Float temp = weatherData.getAsJsonObject("main").get("temp").getAsFloat();
+
+            //parse update time
             Long updateTimeStamp = weatherData.get("dt").getAsLong();
             Date updateTime = new Date(updateTimeStamp * 1000); // convert time stamp to milliseconds
             String pattern = "EEEEE hh:mm aa";
@@ -45,12 +48,15 @@ public class WeatherInfo implements Serializable {
             sdf.setTimeZone(TimeZone.getTimeZone("GMT+10"));
             String updateTimeFormatted = sdf.format(updateTime);
 
+            //parse wind speed
             Float wind = weatherData.getAsJsonObject("wind").get("speed").getAsFloat() * 3.6f; // convert m/s to km/h
+            DecimalFormat decimalFormat=new DecimalFormat(".00");
+            Float windSpeed = Float.parseFloat(decimalFormat.format(wind));
 
             weatherInfo.setCityName(cityName);
             weatherInfo.setUpdateTime(updateTimeFormatted);
             weatherInfo.setTemperature(temp);
-            weatherInfo.setWind(wind);
+            weatherInfo.setWind(windSpeed);
             weatherInfo.setWeather(weather);
             weatherInfo.setStatus("success");
         } catch (Exception e) {

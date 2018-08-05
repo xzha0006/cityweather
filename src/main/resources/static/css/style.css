@@ -1,0 +1,43 @@
+/*!
+ *  Stylesheet for city weather web application
+ *  Created on August 5, 2018
+ *  Author - Xuan Zhang - zhangxuan.james@gmail.com
+ */
+body {
+    // background: #616468;
+    background: #d9dce0;
+}
+.block {
+    background: #fff;
+    padding: 35px 45px;
+    border-radius: 4px;
+    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.2);
+    margin-top: 60px;
+    min-height: 400px;
+}
+#weather-block {
+    display: none;
+}
+.dropdown {
+    margin-top: 30px;
+}
+#weather-icon {
+    font-size: 60px;
+    margin: 30px 0;
+}
+#temperature {
+    font-size: 50px;
+    margin-left: 20px;
+}
+.degree-sign {
+    top: -22px;
+    position: relative;
+}
+
+@media screen and (max-width: 560px) {
+    .block {
+      min-height: 200px;
+      margin-top: 20px;
+      padding: 30px 40px;
+    }
+}
