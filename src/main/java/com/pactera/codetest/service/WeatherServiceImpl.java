@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.ConnectException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -47,10 +48,10 @@ public class WeatherServiceImpl implements WeatherService {
         String url = this.OPEN_WEATHER_API + "&q=" + cityName + "&appid=" + this.ApiKey;
 
         //check the connection of Redis. if Redis was done, use the method of no-Redis
-
-        if(!stringRedisTemplate.getConnectionFactory().getConnection().isClosed()) {
+        try{
             weatherInfo = this.getWeatherInfoWithRedis(url);
-        } else {
+        } catch (Exception e){
+            LOGGER.info("===== cache server cannot be connected  =====");
             weatherInfo = this.getWeatherInfoWithoutRedis(url);
         }
         return weatherInfo;
