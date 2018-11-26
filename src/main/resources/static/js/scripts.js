@@ -4,8 +4,8 @@
  *  Author - Xuan Zhang - zhangxuan.james@gmail.com
  */
 function getWeather(city) {
-    // var url = "http://35.165.93.211:8080/currentWeather/cityName/" + city
-    var url = "http://52.36.124.65:9000/currentWeather/cityName/" + city
+    var url = "http://54.201.42.108:9000/currentWeather/cityName/" + city
+    // var url = "http://localhost:9000/currentWeather/cityName/" + city
     $.get(url, function(weather, status){
         if (status === "success") {
             if (weather.status === "success") {

@@ -1,4 +1,4 @@
-package com.pactera.codetest.exception;
+package com.cityweather.demo.exception;
 
 /**
  * Created by xuanzhang on 5/8/18.

@@ -1,4 +1,4 @@
-package com.pactera.codetest.config;
+package com.cityweather.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;

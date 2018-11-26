@@ -1,9 +1,9 @@
-package com.pactera.codetest.service;
+package com.cityweather.demo.service;
 
+import com.cityweather.demo.exception.JsonParseException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.pactera.codetest.exception.JsonParseException;
-import com.pactera.codetest.vo.WeatherInfo;
+import com.cityweather.demo.vo.WeatherInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.ConnectException;
 import java.util.concurrent.TimeUnit;
 
 

@@ -1,4 +1,4 @@
-package com.pactera.codetest;
+package com.cityweather.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
-package com.pactera.codetest.service;
+package com.cityweather.demo.service;
 
-import com.pactera.codetest.vo.WeatherInfo;
+import com.cityweather.demo.vo.WeatherInfo;
 
 /**
  * Weather Service

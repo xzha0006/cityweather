@@ -1,7 +1,7 @@
-package com.pactera.codetest.vo;
+package com.cityweather.demo.vo;
 
+import com.cityweather.demo.exception.JsonParseException;
 import com.google.gson.JsonObject;
-import com.pactera.codetest.exception.JsonParseException;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
